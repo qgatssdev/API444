@@ -3,7 +3,7 @@ const router = express.Router();
 const User = require('../models/user');
 
 //Getting all
-router.get('/users', async (req, res) => {
+router.get('/', async (req, res) => {
   try {
     const user = await User.find();
     res.json(user);
@@ -13,12 +13,12 @@ router.get('/users', async (req, res) => {
 });
 
 //Getting one
-router.get('/users/:id', getUser, (req, res) => {
+router.get('/:id', getUser, (req, res) => {
   res.json(res.user);
 });
 
 //creating one
-router.post('/users', async (req, res) => {
+router.post('/', async (req, res) => {
   const user = new User({
     name: req.body.name,
     age: req.body.age,
@@ -32,7 +32,7 @@ router.post('/users', async (req, res) => {
 });
 
 //Updating one
-router.put('/users/:id', getUser, async (req, res) => {
+router.put('/:id', getUser, async (req, res) => {
   if (req.body.name != null) {
     res.user.name = res.body.name;
     res.user.age = res.body.name;
@@ -46,7 +46,7 @@ router.put('/users/:id', getUser, async (req, res) => {
 });
 
 //Deleting one
-router.delete('user/:id', getUser, (req, res) => {
+router.delete('/:id', getUser, async (req, res) => {
   try {
     await res.user.remove();
     res.json({ message: 'Deleted User' });
